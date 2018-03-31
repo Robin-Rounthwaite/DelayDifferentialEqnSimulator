@@ -90,7 +90,7 @@ Each member of this society can access to everyone lower than them, but cannot a
 
 #### 2.0: Custom Main
 
-To circumnavigate the argument parsing structure of main.cpp and create a custom main, create a new file with a function `int main(int argc, char* argv[])` insize the `/source` directory. To take advantage of `arg_parse`, be sure to have `arg_parse::init(argc, argv);` at or near the beginning of `main`.
+To circumnavigate the argument parsing structure of main.cpp and create a custom main, create a new file with a function `int main(int argc, char* argv[])` inside the `/source` directory. To take advantage of `arg_parse`, be sure to have `arg_parse::init(argc, argv);` at or near the beginning of `main`.
 
 In order for CMake to generate an executable using the new `main`, various lines must be added to `/source/CMakeLists.txt`. Copy and paste all the lines between and including `function(SIMULATION localname simdir)` and `endfunction(SIMULATION localname simdir)`. In your new CMake function, replace the two occurances of `SIMULATION` with your own name. Next, create a CMake function call after this line, `SIMULATION(simulation ${PROJECT_BINARY_DIR})`. Copy that line, paste it directly below, then replace `SIMULATION` with the name you gave your function earlier and replace `simulation` with what you want the resulting executable to be named. Optionally, to guarantee that the `*_template.csv` files get generated upon building the new `main`, copy the line, `add_dependencies(simulation csv_gen_run)`, then paste it directly below. Replace `simulation` with the executable name you gave earlier. Now, whenever `make` is run, the new executable will also be built.
 
